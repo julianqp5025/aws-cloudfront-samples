@@ -22,16 +22,16 @@ dc=stg_config['DistributionConfig']
 dc.update(prod)
 
 if args.prdid:
-    prd_config = cf_client.get_distribution_config(Id=args.prdid)
-    Etag = prd_config['ETag']
-    dc['CallerReference'] = prd_config['DistributionConfig']['CallerReference']
-    print('updating...')
-    result = cf_client.update_distribution(DistributionConfig=dc, Id=args.prdid, IfMatch=Etag)
-    print('Done')
-    
+	prd_config = cf_client.get_distribution_config(Id=args.prdid)
+	Etag = prd_config['ETag']
+	dc['CallerReference'] = prd_config['DistributionConfig']['CallerReference']
+	print('updating...')
+	result = cf_client.update_distribution(DistributionConfig=dc, Id=args.prdid, IfMatch=Etag)
+	print('Done')
+		
 else:
-    dc['CallerReference'] = '%d' % (time.time(),)
-    print('creating...')
-    result = cf_client.create_distribution(DistributionConfig=dc)
-    print('Done')
+	dc['CallerReference'] = '%d' % (time.time(),)
+	print('creating...')
+	result = cf_client.create_distribution(DistributionConfig=dc)
+	print('Done')
 
